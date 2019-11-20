@@ -1,7 +1,7 @@
 from app import app, mongo
 from bson.json_util import dumps
 from bson.objectid import ObjectId
-from flask import jsonify, request
+from flask import jsonify, request, render_template
 from werkzeug import generate_password_hash, check_password_hash
 
 @app.route('/add', methods=['POST'])
@@ -24,15 +24,17 @@ def add_user():
 		
 @app.route('/users')
 def users():
-	users = mongo.db.user.find()
-	resp = dumps(users)
-	return resp
-		
+    #users = list(mongo.db.user.find())
+    #resp = dumps(users)
+    users = mongo.db.user.find()
+    return render_template('users.html', users=users)
+
 @app.route('/user/<id>')
 def user(id):
 	user = mongo.db.user.find_one({'_id': ObjectId(id)})
 	resp = dumps(user)
 	return resp
+	#return render_template('user.html', user=resp)
 
 @app.route('/update', methods=['PUT'])
 def update_user():

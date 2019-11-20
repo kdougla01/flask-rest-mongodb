@@ -1,0 +1,19 @@
+<table class="table">
+	<thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+    </thead>
+    <tbody>
+	{% for user in users %}
+	<tr>
+		<td>
+			{{user.name}}
+		</td>
+		<td>
+			{{user.email}}
+		</td>
+	</tr>
+	{% endfor %}
+	</tbody>
+</table>
